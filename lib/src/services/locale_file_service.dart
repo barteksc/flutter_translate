@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:flutter_translate/src/constants/constants.dart';
 
 class LocaleFileService
 {
@@ -31,13 +30,11 @@ class LocaleFileService
 
     static Future<List<String>> _getAllLocaleFiles(String basePath) async
     {
-        final manifest = await rootBundle.loadString(Constants.assetManifestFilename);
-
-        Map<String, dynamic> map = jsonDecode(manifest);
+        final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
 
         var separator = basePath.endsWith('/') ? '' : '/';
 
-        return map.keys.where((x) => x.startsWith('$basePath$separator')).toList();
+        return assetManifest.listAssets().where((x) => x.startsWith('$basePath$separator')).toList();
     }
 
     static String _findLocaleFile(String languageCode, List<String> localizedFiles, String basePath)

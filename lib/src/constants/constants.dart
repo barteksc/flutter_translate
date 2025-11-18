@@ -1,7 +1,5 @@
 class Constants
 {
-    static const String assetManifestFilename = 'AssetManifest.json';
-
     static const String localizedAssetsPath = 'assets/i18n';
 
     static const String pluralZero = 'zero';
